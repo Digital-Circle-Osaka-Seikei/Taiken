@@ -8,6 +8,12 @@
 - `index.html` をブラウザで開くだけで遊べます（インターネット接続が必要です）
 - GitHub Pages で公開すると、URLを送るだけで友達のスマホでも遊べます
 
+## コメント付きバージョン
+
+`commented/` フォルダに、1行ずつくわしい説明コメントを入れたバージョンがあります。
+動きは同じなので、ルートのコードと見比べながら読んでみてください。
+公開後は `https://2370058.github.io/Taiken/commented/` でも遊べます。
+
 ## コードの地図（sketch.js）
 
 | ブロック | 場所 | Scratchでいうと |
@@ -38,5 +44,5 @@
 ## GitHub Pages で公開する手順
 
 1. このリポジトリの Settings → Pages を開く
-2. Source を「Deploy from a branch」、Branch を `main` / `(root)` にして保存
+2. Source を「Deploy from a branch」、Branch を `master` / `(root)` にして保存
 3. 数分後に表示されるURLにアクセスすると遊べます

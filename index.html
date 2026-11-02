@@ -1,49 +1,26 @@
-<!-- HTML5の宣言。DOCTYPEは文書の種類を指定するためのもので、HTML5では<!doctype html>と書く -->
 <!doctype html>
-<!-- HTMLの言語を日本語に設定。lang="ja"は日本語を意味する -->
 <html lang="ja">
-<!-- このファイルの構成は<head>タグと<body>タグで構成されている -->
-
-<!-- <head>タグはHTMLのヘッダー部分で、今回のコードでは文字コードやタイトル、スタイルシートやスクリプトの読み込みなどを行う -->
 <head>
-  <!-- 文字コードとビューポートの設定 -->
-  <!-- 文字コードをUTF-8に設定。日本語などの多言語に対応するため -->
   <meta charset="utf-8">
-
-  <!-- ビューポートを設定。スマホなどの画面サイズに合わせて表示するため -->
-  <!-- width=device-widthは画面の幅をデバイスの幅に合わせる 、initial-scale=1は画面の拡大率を100%に設定 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- タイトルを設定、実際の画面には表示されないが、ブラウザのタブやブックマークに表示される -->
   <title>よけゲー</title>
   <style>
-    /* <body>タグ</body>のスタイルを設定。margin:0で余白をなくし、背景色を#1e1e1eに設定（手で調整可能）。 */
     body {
       margin: 0;
       background: #1e1e1e;
-      /* 画面の高さを100%に設定。縦の表示幅をブラウザ画面一杯に合わせてflexboxの縦の中央揃えの基準にする */
-      min-height: 100vh;
-      /*display:flexboxを作成してjustify-contentとalign-itemsを有効にさせる。 */
       display: flex;
-      /*justify-content:centerで水平方向の中央揃え */
       justify-content: center;
-      /*align-items:centerで垂直方向の中央揃え */
       align-items: center;
+      min-height: 100vh;
     }
     canvas {
-      display: block;/* canvasをブロック要素（画面横いっぱいに広がり、前後は改行される特徴を持つ）として表示することで、余白をなくす */
+      display: block;
       touch-action: none; /* スマホで指を動かしたときに画面がスクロールしないように */
     }
   </style>
-  <!-- p5.jsのライブラリを読み込む。p5.jsはProcessing（Javaで作られた絵を描けるライブラリ）のJavaScript版で、簡単にグラフィックやアニメーションを作れる。
-   p5.jsの詳細のドキュメントはhttps://p5js.org/ 他にも3Dモデルを扱えたりするらしい…-->
-  <!-- sketch.jsを読み込む前にp5.jsを読み込む必要がある。 -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
 </head>
-
-<!-- <body>タグはHTMLの本文部分で、実際に画面に表示される内容を記述する -->
 <body>
-  <!-- canvas（ゲーム画面）を表示するためのHTML要素は不要。p5.jsが自動でcanvasを作成してbodyに追加する -->
-  <!-- sketch.jsを読み込む。sketch.jsはこのゲームのメインの処理が書かれたJavaScriptファイル -->
   <script src="sketch.js"></script>
 </body>
 </html>
