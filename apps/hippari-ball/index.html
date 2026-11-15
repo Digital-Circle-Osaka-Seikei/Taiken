@@ -32,6 +32,10 @@
       width: min(480px, calc(100vw - 40px), calc((100vh - 40px) * 0.6));
       height: auto;
       aspect-ratio: 480 / 800;
+      /* スマホで指を動かしたとき、ページがスクロールするのを止めます。
+         指の動きをボールのひっぱりに使うためです。
+         変えると：この1行を消すと、指でひっぱるとページが一緒に動いてしまいます */
+      touch-action: none;
     }
   </style>
 </head>

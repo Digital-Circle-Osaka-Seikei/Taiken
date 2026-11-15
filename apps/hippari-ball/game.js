@@ -1,4 +1,5 @@
 // ひっぱりボール：機能2「マウスでひっぱって離すと、反対向きに同じ速さで飛ぶ」
+//              ＋ 機能4「指（スマホ）でも同じように飛ばせる」（Pointer Events を使って、マウスと指を同じコードで受け取る）
 //              ＋ 機能3「壁に当たると跳ね返る（入射角＝反射角、跳ね返るたびに少し減速）」
 // ボールを1個置き、マウスでひっぱって離すと、ひっぱった向きの反対へ飛んでいきます。
 // 画面の端に当たると跳ね返り、跳ね返るたびに少しずつ遅くなります。
@@ -60,11 +61,15 @@ function toCanvasPos(event) {
   };
 }
 
-// ----- きっかけ：マウスの操作 -----
+// ----- きっかけ：マウスや指で押す・動かす・離す -----
+// 「pointer」は、マウス・指・ペンなど画面を押す道具をまとめた言い方です。
+// mousedown などの名前だと、スマホの指の操作には反応しません。
+// そこで pointerdown などを使うと、マウスも指も同じ3つの出来事で受け取れます。
 
-// マウスを押したとき。ボールの上で押されたら「ひっぱり開始」にします
+// 押したとき（マウスのボタン、または指が画面に触れたとき）。
+// ボールの上で押されたら「ひっぱり開始」にします。
 // 飛んでいる最中は、押しても何も起きないようにします（次のひっぱりは機能5で作ります）
-canvas.addEventListener('mousedown', (event) => {
+canvas.addEventListener('pointerdown', (event) => {
   if (ball.flying) return;
 
   const p = toCanvasPos(event);
@@ -78,18 +83,21 @@ canvas.addEventListener('mousedown', (event) => {
   }
 });
 
-// マウスを動かしたとき。ひっぱり中だけ、線の先を今のマウス位置に合わせます
-// canvas の外まで動いても線が追えるように、canvas ではなく window で受け取ります
-window.addEventListener('mousemove', (event) => {
+// 動かしたとき（マウスを動かす、または指を滑らせたとき）。
+// ひっぱり中だけ、線の先を今の位置に合わせます。
+// canvas の外まで動いても線が追えるように、canvas ではなく window で受け取ります。
+// 変えると：window を canvas に変えると、枠の外へ指を出したときに線が止まってしまいます
+window.addEventListener('pointermove', (event) => {
   if (!drag.active) return;
   const p = toCanvasPos(event);
   drag.x = p.x;
   drag.y = p.y;
 });
 
-// マウスを離したとき。ここで「飛ばす」かどうかを決めます
+// 離したとき（マウスのボタンを離す、または指を画面から離したとき）。
+// ここで「飛ばす」かどうかを決めます。
 // canvas の外で離されても飛ぶように、window で受け取ります
-window.addEventListener('mouseup', (event) => {
+window.addEventListener('pointerup', (event) => {
   if (!drag.active) return;
   drag.active = false;
 
@@ -107,6 +115,13 @@ window.addEventListener('mouseup', (event) => {
   ball.vx = (dx / len) * LAUNCH_SPEED;
   ball.vy = (dy / len) * LAUNCH_SPEED;
   ball.flying = true;
+});
+
+// ブラウザが操作を途中で横取りしたとき（スマホで、指の動きをスクロールに使い始めた場合など）。
+// 飛ばさずに、ひっぱりだけ終わらせます。こうしないと、ひっぱり中のまま固まってしまうことがあります。
+// 変えると：この処理を消すと、途中で横取りされたあとに線が残ったままになることがあります
+window.addEventListener('pointercancel', () => {
+  drag.active = false;
 });
 
 // ----- 毎回の変化：1コマごとに、ボールを進めます -----
