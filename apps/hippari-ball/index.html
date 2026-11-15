@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- ブラウザで開く入口のページです。ここには「骨組み」と「絵を描く場所（canvas）」だけを書きます。
+     動きの指示は game.js に書きます。 -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <!-- スマホで横幅を画面に合わせるための設定です -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ひっぱりボール</title>
+  <style>
+    /* 画面の周りに16pxのすき間を取り、横にスクロールが出ないようにします */
+    body {
+      margin: 0;
+      padding: 16px;
+      background: #f4f4f4;
+      font-family: sans-serif;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 12px 0;
+    }
+    /* 絵を描く場所。横幅は画面に合わせ、高さは game.js で決めます */
+    #game {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      background: #ffffff;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ひっぱりボール</h1>
+
+  <!-- ゲームの場所。game.js がこの中に絵を描きます -->
+  <canvas id="game"></canvas>
+
+  <!-- ゲームの動きを書いたファイルを読み込みます。body の最後に置くと、canvas が先に用意されています -->
+  <script src="game.js"></script>
+</body>
+</html>
