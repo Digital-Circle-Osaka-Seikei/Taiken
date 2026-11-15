@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!-- スマホでも横幅に合わせて表示されるようにする -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ひっぱりボール</title>
+  <style>
+    /* ページ全体の見た目：背景を薄いグレーにして、ゲームの場所を真ん中に置く */
+    body {
+      margin: 0;
+      padding: 16px; /* 画面の端との間に少し余白を入れる */
+      background: #f4f4f4;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ゲームの場所（canvas）の見た目。白い四角に黒い枠 */
+    /* max-width:100% は、画面が小さいときに横からはみ出さないための設定 */
+    canvas {
+      background: #fff;
+      border: 2px solid #333;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- ゲームの場所。絵はここに game.js が描く。大きさは 800 x 500 -->
+  <canvas id="game" width="800" height="500"></canvas>
+
+  <!-- game.js は canvas の後で読み込む。先に読むと canvas がまだ無く、動かないため -->
+  <script src="game.js"></script>
+</body>
+</html>
