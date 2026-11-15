@@ -11,6 +11,8 @@
     body {
       margin: 0;
       min-height: 100vh;
+      box-sizing: border-box;
+      padding: 16px;           /* 周りに余白を入れます（スマホでも16px） */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,12 +22,16 @@
       font-family: sans-serif;
     }
 
-    /* ゲームの場所（canvas）の枠。大きさは game.js と同じ 480x800 です */
+    /* ゲームの場所（canvas）の枠。中身の大きさは game.js と同じ 480x800 です */
     canvas {
+      box-sizing: border-box;  /* 枠線も含めて大きさを計算します（はみ出し防止） */
       background: #2b2d42;
       border: 2px solid #8d99ae;
-      max-width: 100%;   /* 小さい画面では、はみ出さないように縮めます */
+      /* 幅は「480px」「画面の幅」「窓の高さに合う幅」のうち一番小さい値にします。
+         高さは縦横の比（480：800）から自動で決まるので、窓の中に全部入ります */
+      width: min(480px, calc(100vw - 40px), calc((100vh - 40px) * 0.6));
       height: auto;
+      aspect-ratio: 480 / 800;
     }
   </style>
 </head>
